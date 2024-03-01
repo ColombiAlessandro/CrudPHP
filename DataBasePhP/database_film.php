@@ -64,6 +64,7 @@
                 echo $row['descrizione']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo "<form action='elimina_database.php?database=film' method='post'><div name='id_recensione' value=". $row["id_recensione"]."><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Elimina</button></div></form>";
+                echo "<form action='modifica_film.php' method='post'><div name='id_recensione' value=". $row["id_recensione"]."><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Modifica</button></div></form>";
                 echo"</th>";
                 echo "</tr>";
             }

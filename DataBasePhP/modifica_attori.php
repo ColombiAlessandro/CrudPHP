@@ -7,7 +7,9 @@
     $servername="localhost";
     $username= "programma";
     $password= "12345";
-    $id_attore=$_POST["id_attore"];
+    session_start();
+    $id=$_POST["id"];
+    $_SESSION["id_attori"]=$id;
     $conn = new PDO("mysql:host=$servername;dbname=cinematografia", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql="SELECT attori.id, attori.nome,attori.cognome,attori.data_di_nascita,attori.data_di_morte FROM attori;";
@@ -16,11 +18,10 @@
     $result = $statement->fetch();
     
     ?>
-    <form action="modifica_database.php?database=attori" method="post">
+    <form action="modifica_database.php?database=registi" method="post">
     <label>Nome attore</label>
     <?php
     echo"<input class='form-control' type='text' placeholder='Default input' value=". $result["nome"]." name='nome_attore' required>";
-    echo"<div name='id' value=". $id_attore ."></div>";
     ?>
     <label>Cognome attore</label>
     <?php
@@ -32,9 +33,9 @@
     ?>
     <label>Data di morte</label><br>
     <input type="date" id="data" name="data_morte"> <br> <br>
-    <button type="submit" class="btn btn-primary">Aggiungi</button> 
+    <button type="submit" class="btn btn-primary">Modifica</button> 
     </form>
-    <form action="database_attori.php">
+    <form action="database_registi.php">
     <button type="submit">Indietro</button>
     </form>
 </html>

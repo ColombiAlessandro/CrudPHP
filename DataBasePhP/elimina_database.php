@@ -4,6 +4,7 @@ $tipo_database=$_GET["database"];
 $conn = new PDO("mysql:host=localhost;dbname=cinematografia","programma", "12345");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if($tipo_database=="attori"){
+    $id_rimuovi=$_POST["id"];
     $sql="DELETE FROM attori WHERE attori.id=". $id_rimuovi. ";";
     $statement= $conn->prepare($sql);
     $statement ->execute(); 

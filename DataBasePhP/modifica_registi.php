@@ -7,7 +7,9 @@
     $servername="localhost";
     $username= "programma";
     $password= "12345";
+    session_start();
     $id=$_POST["id"];
+    $_SESSION["id_regista"]=$id;
     $conn = new PDO("mysql:host=$servername;dbname=cinematografia", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql="SELECT registi.id, registi.nome,registi.cognome,registi.data_di_nascita,registi.data_di_morte FROM registi;";
@@ -19,8 +21,8 @@
     <form action="modifica_database.php?database=registi" method="post">
     <label>Nome attore</label>
     <?php
+    echo"<input class='form-control' type='text' placeholder='Disabled input' aria-label='Disabled input example' value=". $id ." name='id' disabled>";
     echo"<input class='form-control' type='text' placeholder='Default input' value=". $result["nome"]." name='nome_regista' required>";
-    echo"<div name='id' value='". $id ."'></div>";
     ?>
     <label>Cognome attore</label>
     <?php
@@ -32,7 +34,7 @@
     ?>
     <label>Data di morte</label><br>
     <input type="date" id="data" name="data_morte"> <br> <br>
-    <button type="submit" class="btn btn-primary">Aggiungi</button> 
+    <button type="submit" class="btn btn-primary">Modifica</button> 
     </form>
     <form action="database_registi.php">
     <button type="submit">Indietro</button>

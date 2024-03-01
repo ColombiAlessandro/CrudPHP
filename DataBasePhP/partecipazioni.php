@@ -51,6 +51,8 @@
                 echo $row['Film']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo "<form action='elimina_database.php?database=partecipazioni' method='post'><div name='id_film' value=" . $row["id_film"] . "><button type='submit' class='tn btn-primary' value='". $row["id_attore"]."' name='id_attore'>Elimina</button></div></form>";
+                echo "<form action='mod_partecipazioni.php' method='post'><input type='hidden' name='idFilm' value=" . $row["id_film"] . "><button type='submit' class='tn btn-primary' value='". $row["id_attore"]."' name='idAttore'>Modifica</button></form>";
+
                 echo"</th>";
                 echo "</tr>";
             }

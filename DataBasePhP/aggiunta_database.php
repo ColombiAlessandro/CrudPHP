@@ -75,15 +75,18 @@ if(isset($tipo_database)){
         $sql="SELECT recensione.id FROM recensione;";
        $statement= $conn->prepare($sql);
        $statement ->execute();
-       $result = $statement->fetchAll();
        $id_recensione;
        foreach($result as $row){
         $id_recensione=$row["id"];
        } 
-       /*$sql="UPDATE film SET film.id_recensione=" . $id_recensione . " WHERE film.id= " . $id_film. ";";
+       $sql="UPDATE film SET film.id_recensione=:id_recensione WHERE film.id=:id_film";
        $statement= $conn->prepare($sql);
-       $statement ->execute();*/
-       header("location:database_film.php");
+       $statement->bindparam(":id_recensione",$id_recensione);
+        $statement->bindparam(":id_film",$id_film);
+       $statement ->execute();
+       echo $id_recensione."culo";
+       echo $id_film."culo";
+       //header("location:database_film.php");
     }
 }
 ?>

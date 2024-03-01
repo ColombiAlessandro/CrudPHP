@@ -55,7 +55,7 @@
                 echo $row['data_di_morte']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo "<form action='elimina_database.php?database=attori' method='post'><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Elimina</button></form>";
-                echo "<form action='modifica_attori.php' method='post'><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id_attore'>Modifica</button></form>";
+                echo "<form action='modifica_attori.php' method='post'><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Modifica</button></form>";
                 echo"</th>";
                 echo "</tr>";
             }
