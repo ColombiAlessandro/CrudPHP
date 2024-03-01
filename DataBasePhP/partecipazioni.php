@@ -28,6 +28,7 @@
             <th style="border:1px solid black">Nome Attore</th>
             <th style="border:1px solid black">Cognome Attore</th>
             <th style="border:1px solid black">Film</th>
+            <th style="border:1px solid black">Altro</th>
         </tr>
         <?php
         $servername="localhost";
@@ -36,7 +37,7 @@
         try{
             $conn = new PDO("mysql:host=$servername;dbname=cinematografia", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="SELECT attori.nome as nomeAttore,attori.cognome as cognomeAttore,film.nome as Film FROM (partecipazioni join film on film.id=partecipazioni.id_film) join attori on partecipazioni.id_attore=attori.id;";
+            $sql="SELECT partecipazioni.id_attore, partecipazioni.id_film, attori.nome as nomeAttore,attori.cognome as cognomeAttore,film.nome as Film FROM (partecipazioni join film on film.id=partecipazioni.id_film) join attori on partecipazioni.id_attore=attori.id;";
             $statement= $conn->prepare($sql);
             $statement ->execute();
             $result = $statement->fetchAll();
@@ -48,6 +49,10 @@
                 echo $row['cognomeAttore']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo $row['Film']."</th>";
+                echo "<th style='border:1px solid black'>";
+                echo "<form action='elimina_database.php?database=partecipazioni' method='post'><div name='id_film' value=" . $row["id_film"] . "><button type='submit' class='tn btn-primary' value='". $row["id_attore"]."' name='id_attore'>Elimina</button></div></form>";
+                echo"</th>";
+                echo "</tr>";
             }
         } catch(PDOException $e){
             echo $e ->__toString();

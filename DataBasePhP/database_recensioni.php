@@ -28,6 +28,7 @@
             <th style="border:1px solid black">Valutazione</th>
             <th style="border:1px solid black">Descrizione</th>
             <th style="border:1px solid black">Film</th>
+            <th style="border:1px solid black">Altro</th>
         </tr>
         <?php
         $servername="localhost";
@@ -36,7 +37,7 @@
         try{
             $conn = new PDO("mysql:host=$servername;dbname=cinematografia", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="SELECT recensione.valutazione, recensione.descrizione, film.nome FROM recensione join film on recensione.id_film=film.id;";
+            $sql="SELECT recensione.id_film, recensione.id, recensione.valutazione, recensione.descrizione, film.nome FROM recensione join film on recensione.id_film=film.id;";
             $statement= $conn->prepare($sql);
             $statement ->execute();
             $result = $statement->fetchAll();
@@ -48,6 +49,9 @@
                 echo $row['descrizione']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo $row['nome']."</th>";
+                echo "<th style='border:1px solid black'>";
+                echo "<form action='elimina_database.php?database=recensioni' method='post'><div name='id_film' value=". $row["id_film"]."><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Elimina</button></div></form>";
+                echo"</th>";
                 echo "</tr>";
             }
         } catch(PDOException $e){

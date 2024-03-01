@@ -80,9 +80,9 @@ if(isset($tipo_database)){
        foreach($result as $row){
         $id_recensione=$row["id"];
        } 
-       $sql="UPDATE film SET film.id_recensione=" . $id_recensione . " WHERE film.id= " . $id_film. ";";
+       /*$sql="UPDATE film SET film.id_recensione=" . $id_recensione . " WHERE film.id= " . $id_film. ";";
        $statement= $conn->prepare($sql);
-       $statement ->execute();
+       $statement ->execute();*/
        header("location:database_film.php");
     }
 }

@@ -29,7 +29,8 @@
             <th style="border:1px solid black">Nome</th>
             <th style="border:1px solid black">Cognome</th>
             <th style="border:1px solid black">Data di nascita</th>
-            <th style="border:1px solid black">Data di morte</th>
+            <th style="border:1px solid black">Data di morte</th>   
+            <th style="border:1px solid black">Altro</th>
         </tr>
         <?php
         $servername="localhost";
@@ -38,7 +39,7 @@
         try{
             $conn = new PDO("mysql:host=$servername;dbname=cinematografia", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="SELECT attori.nome,attori.cognome,attori.data_di_nascita,attori.data_di_morte FROM attori;";
+            $sql="SELECT attori.id, attori.nome,attori.cognome,attori.data_di_nascita,attori.data_di_morte FROM attori;";
             $statement= $conn->prepare($sql);
             $statement ->execute();
             $result = $statement->fetchAll();
@@ -52,6 +53,10 @@
                 echo $row['data_di_nascita']."</th>";
                 echo "<th style='border:1px solid black'>";
                 echo $row['data_di_morte']."</th>";
+                echo "<th style='border:1px solid black'>";
+                echo "<form action='elimina_database.php?database=attori' method='post'><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id'>Elimina</button></form>";
+                echo "<form action='modifica_attori.php' method='post'><button type='submit' class='tn btn-primary' value='". $row["id"]."' name='id_attore'>Modifica</button></form>";
+                echo"</th>";
                 echo "</tr>";
             }
         } catch(PDOException $e){
