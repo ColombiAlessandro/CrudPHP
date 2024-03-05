@@ -72,9 +72,11 @@ if(isset($tipo_database)){
         $statement->bindparam(":valutazione",$valutazione);
         $statement->bindparam(":descrizione",$descrizione);
         $statement->bindparam(":id_film",$id_film);
-        $sql="SELECT recensione.id FROM recensione;";
+        $statement ->execute();
+       $sql="SELECT recensione.id FROM recensione;";
        $statement= $conn->prepare($sql);
        $statement ->execute();
+       $result = $statement->fetchAll();
        $id_recensione;
        foreach($result as $row){
         $id_recensione=$row["id"];
@@ -86,7 +88,7 @@ if(isset($tipo_database)){
        $statement ->execute();
        echo $id_recensione."culo";
        echo $id_film."culo";
-       //header("location:database_film.php");
+       header("location:database_film.php");
     }
 }
 ?>
